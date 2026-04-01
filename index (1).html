@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gossamer — Engineering & Solar Structural Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d2340;
+      --navy-mid: #1a3a5c;
+      --blue: #1e5fa8;
+      --blue-light: #2e7bd6;
+      --accent: #3a8fe8;
+      --steel: #4a6fa5;
+      --silver: #b8c8d8;
+      --off-white: #f4f7fb;
+      --white: #ffffff;
+      --text-dark: #111827;
+      --text-mid: #374151;
+      --text-muted: #6b7280;
+      --border: #dde5ef;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 35, 64, 0.97);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-light) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg, rgba(13,35,64,0.92) 38%, rgba(13,35,64,0.55) 100%),
+        url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    /* Subtle geometric overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.012) 60px,
+        rgba(255,255,255,0.012) 61px
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      padding: 120px 80px 80px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.72);
+      max-width: 540px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: 3px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: 3px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.07); transform: translateY(-1px); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--off-white);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 52px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .trust-item:not(:last-child) {
+      border-right: 1px solid var(--border);
+    }
+
+    .trust-item:nth-child(1) { animation-delay: 0.1s; }
+    .trust-item:nth-child(2) { animation-delay: 0.2s; }
+    .trust-item:nth-child(3) { animation-delay: 0.3s; }
+
+    .trust-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .trust-text {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      line-height: 1.45;
+    }
+
+    .trust-text strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 88px 80px; }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .section-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--blue);
+      margin-bottom: 48px;
+    }
+
+    .section-header-center {
+      text-align: center;
+    }
+    .section-header-center .section-rule {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--white); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 36px rgba(13,35,64,0.12);
+      transform: translateY(-3px);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--navy-mid);
+    }
+
+    .card-body {
+      padding: 24px 26px 28px;
+    }
+
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .card-sub {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    /* ── PROJECTS ── */
+    .projects { background: var(--off-white); }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 12px 36px rgba(13,35,64,0.12);
+      transform: translateY(-3px);
+    }
+
+    .project-card .card-img { height: 210px; }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(30,95,168,0.08);
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ── WHY GOSSAMER ── */
+    .why { background: var(--navy); padding: 88px 80px; }
+
+    .why .section-title { color: var(--white); }
+    .why .section-label { color: var(--accent); }
+    .why .section-rule { background: var(--accent); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .why-item {
+      background: rgba(13,35,64,0.6);
+      padding: 44px 40px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .why-item:hover { background: rgba(30,95,168,0.25); }
+
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      color: var(--accent);
+      margin: 0 auto 20px;
+    }
+
+    .why-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .why-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.62);
+    }
+
+    /* ── ABOUT + CONTACT ── */
+    .about-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .about-panel {
+      position: relative;
+      background:
+        linear-gradient(135deg, rgba(13,35,64,0.93) 0%, rgba(26,58,92,0.9) 100%),
+        url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1000&auto=format&fit=crop') center/cover no-repeat;
+      padding: 80px 72px;
+      color: var(--white);
+    }
+
+    .about-panel .section-label { color: var(--accent); }
+    .about-panel .section-title { color: var(--white); }
+    .about-panel .section-rule { background: var(--accent); }
+
+    .about-body {
+      font-size: 15.5px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 36px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-block {
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+    }
+
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Contact panel */
+    .contact-panel {
+      background: var(--off-white);
+      padding: 80px 72px;
+    }
+
+    .contact-panel .section-label { color: var(--blue); }
+    .contact-panel .section-title { color: var(--navy); }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(30,95,168,0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-success {
+      display: none;
+      padding: 18px 22px;
+      background: rgba(30,95,168,0.08);
+      border: 1.5px solid var(--blue);
+      border-radius: 3px;
+      font-size: 15px;
+      color: var(--navy);
+      font-weight: 500;
+      margin-top: 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      padding: 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-copy {
+      grid-column: 1 / -1;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── IMAGE FALLBACK PLACEHOLDERS ── */
+    .img-placeholder {
+      width: 100%;
+      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--steel) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-placeholder svg {
+      width: 40px;
+      height: 40px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 32px; }
+      .hero-content { padding: 100px 48px 64px; }
+      section { padding: 64px 48px; }
+      .trust-bar { padding: 24px 32px; }
+      .trust-item { padding: 0 32px; }
+      .about-panel, .contact-panel { padding: 64px 48px; }
+      footer { padding: 40px 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-content { padding: 90px 28px 56px; }
+      section { padding: 56px 28px; }
+      .cards-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
+      .about-contact { grid-template-columns: 1fr; }
+      .trust-bar { flex-direction: column; gap: 20px; padding: 28px; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 20px; width: 100%; }
+      .trust-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .about-panel, .contact-panel { padding: 56px 28px; }
+      footer { grid-template-columns: 1fr; padding: 36px 28px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+      .form-row { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .why-grid { background: transparent; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Gossamer</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#contact" class="nav-cta">Request Consultation</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Structural &amp; Solar Engineering</p>
+      <h1>Engineering &amp; Solar Structural Solutions for <em>Complex Projects</em></h1>
+      <p class="hero-sub">Designing, building, and delivering high-performance structural and solar systems for utility-scale, architectural, and scientific applications.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Request a Consultation
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#projects" class="btn-outline">View Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <div class="trust-text">
+        <strong>Decades of Engineering Expertise</strong>
+        Utility-scale &amp; architectural systems
+      </div>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+      </svg>
+      <div class="trust-text">
+        <strong>Proven Performance</strong>
+        in complex environments
+      </div>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+      </svg>
+      <div class="trust-text">
+        <strong>Recognized for Innovation</strong>
+        in energy &amp; structural systems
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header-center">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our Services</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=700&auto=format&fit=crop"
+          alt="Solar Structural Systems"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:200px;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1M4.22 4.22l.707.707M18.364 18.364l.707.707M1 12h1m20 0h1M4.22 19.778l.707-.707M18.364 5.636l.707-.707"/></svg>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Solar Structural Systems</h3>
+          <p class="card-sub">CSP &amp; Utility-Scale Solutions</p>
+          <a href="#contact" class="card-link">
+            Learn more
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&auto=format&fit=crop"
+          alt="Architectural & Structural Systems"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:200px;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Architectural &amp; Structural Systems</h3>
+          <p class="card-sub">Custom Engineered Structures</p>
+          <a href="#contact" class="card-link">
+            Learn more
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&auto=format&fit=crop"
+          alt="Engineering & Project Services"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:200px;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Engineering &amp; Project Services</h3>
+          <p class="card-sub">Design, Management &amp; QA/QC</p>
+          <a href="#contact" class="card-link">
+            Learn more
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="section-header-center">
+      <p class="section-label">Our Work</p>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="project-card card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=700&auto=format&fit=crop"
+          alt="Utility-Scale Solar Project"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:210px;"></div>
+        <div class="card-body">
+          <span class="project-tag">Solar Energy</span>
+          <h3 class="card-title">Utility-Scale Solar Project</h3>
+          <p class="card-sub">FPL Martin Plant</p>
+        </div>
+      </div>
+
+      <div class="project-card card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=700&auto=format&fit=crop"
+          alt="Advanced Engineering Project"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:210px;"></div>
+        <div class="card-body">
+          <span class="project-tag">Defense &amp; Aerospace</span>
+          <h3 class="card-title">Advanced Engineering Project</h3>
+          <p class="card-sub">Lockheed Martin</p>
+        </div>
+      </div>
+
+      <div class="project-card card">
+        <img
+          class="card-img"
+          src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=700&auto=format&fit=crop"
+          alt="Custom Structural Systems"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="img-placeholder card-img" style="display:none; height:210px;"></div>
+        <div class="card-body">
+          <span class="project-tag">Structural</span>
+          <h3 class="card-title">Custom Structural Systems</h3>
+          <p class="card-sub">Specialized Solutions</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY GOSSAMER -->
+  <section class="why" id="why">
+    <div class="section-header-center">
+      <p class="section-label">Our Edge</p>
+      <h2 class="section-title">Why Gossamer</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="why-grid">
+
+      <div class="why-item">
+        <svg class="why-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
+        </svg>
+        <h3 class="why-title">Integrated Engineering Approach</h3>
+        <p class="why-desc">End-to-end project delivery — from design through manufacturing support and field installation — under one cohesive technical team.</p>
+      </div>
+
+      <div class="why-item">
+        <svg class="why-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/>
+        </svg>
+        <h3 class="why-title">Proven Technical Expertise</h3>
+        <p class="why-desc">Deep engineering knowledge in solar structural mechanics, precision fabrication, and complex project environments with exacting tolerances.</p>
+      </div>
+
+      <div class="why-item">
+        <svg class="why-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/>
+        </svg>
+        <h3 class="why-title">Built for Complex Projects</h3>
+        <p class="why-desc">We thrive where standard solutions fall short — utility-scale, architectural landmark, and scientific research applications are our specialty.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT + CONTACT -->
+  <div class="about-contact" id="about">
+
+    <div class="about-panel">
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">About Us</h2>
+      <div class="section-rule"></div>
+      <p class="about-body">
+        Gossamer specializes in structural and solar system solutions for large-scale, complex projects. With a focus on innovation and technical excellence, we deliver reliable results across energy, architectural, and scientific industries.
+      </p>
+      <p class="about-body">
+        Our mission is to explore the world of technical possibilities — creating the best answers to meet the fundamental needs of our clients and the world around us.
+      </p>
+      <div class="about-stats">
+        <div class="stat-block">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Industry Sectors</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">GW</div>
+          <div class="stat-label">Solar Capacity Supported</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-panel" id="contact">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Let's Discuss<br>Your Project</h2>
+      <div class="section-rule"></div>
+      <p style="font-size:15px; color:var(--text-muted); margin-bottom:28px; line-height:1.6;">Have a project that requires precision engineering or structural innovation? Let's connect.</p>
+
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="project-type">Project Type</label>
+          <select id="project-type" name="project_type">
+            <option value="" disabled selected>Select a project type…</option>
+            <option>Solar Structural Systems</option>
+            <option>Architectural &amp; Structural Systems</option>
+            <option>Engineering &amp; Project Services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project…" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+          Request Consultation
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+        <div class="form-success" id="form-success">
+          ✓ Thank you! We'll be in touch shortly.
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">Gossamer</div>
+      <div class="footer-tagline">Engineering &amp; Solar Structural Solutions</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">
+      © 2025 Gossamer Space Frames, LLC. All rights reserved. &nbsp;·&nbsp;
+      <a href="#" style="color:inherit; text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="#" style="color:inherit; text-decoration:none;">Terms of Service</a>
+    </p>
+  </footer>
+
+  <script>
+    // Smooth nav shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.height = window.scrollY > 60 ? '52px' : '64px';
+    });
+
+    // Contact form — Formspree AJAX
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('form-success');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          successMsg.style.display = 'block';
+          btn.textContent = 'Sent!';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        btn.textContent = 'Error — please email us directly';
+        btn.disabled = false;
+      }
+    });
+
+    // Intersection observer for fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card, .why-item, .stat-block').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
